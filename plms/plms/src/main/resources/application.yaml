@@ -1,0 +1,61 @@
+# 在打包为jar后，可以直接将配置文件放置到jar包的同级目录或config文件夹下（优先读取config文件夹下，然后同级，最后jar包内)
+server:
+  port: 8089 # 运行的端口
+  servlet:
+    # 前端控制器的监听路径,yaml配置此路径会报错
+    # path: *.action
+    # 访问的前缀
+    context-path: /pms
+
+# 输出的日志级别
+logging:
+  level:
+    org:
+      springframework: info
+
+# druid spring boot 配置
+druidDataSource: &druidDataSource # 别名
+  filters: stat
+  maxActive: 50
+  initialSize: 1
+  maxWait: 60000
+  minIdle: 10
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  validationQuery: SELECT 'x'
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  maxOpenPreparedStatements: 100
+  removeAbandoned: true
+  removeAbandonedTimeout: 1800
+  logAbandoned: true
+  type: com.alibaba.druid.pool.DruidDataSource
+
+spring:
+  datasource:
+    druid:
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.6.7:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8
+      <<: *druidDataSource # *引用别名， << 表示合并到当前
+# mybatis 配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: net.froeasy.wpc.po
+  config-location: classpath:mybatis-config/mybatis-config.xml
+# pageHelper分页配置
+pagehelper:
+  # 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用
+  offset-as-page-num: true
+  # 设置为true时，使用RowBounds分页会进行count查询
+  row-bounds-with-count: true
+  # 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果
+  page-size-zero: true
+  # 分页参数合理化，默认false禁用，禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据
+  reasonable: true
+  # 为了支持startPage(Object params)方法，增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值
+  params: pageNum=start;pageSize=limit;
+  # 支持通过Mapper接口参数来传递分页参数
+  support-methods-arguments: true
