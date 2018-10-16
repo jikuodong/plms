@@ -1,20 +1,20 @@
-# ÔÚ´ò°üÎªjarºó£¬¿ÉÒÔÖ±½Ó½«ÅäÖÃÎÄ¼ş·ÅÖÃµ½jar°üµÄÍ¬¼¶Ä¿Â¼»òconfigÎÄ¼ş¼ĞÏÂ£¨ÓÅÏÈ¶ÁÈ¡configÎÄ¼ş¼ĞÏÂ£¬È»ºóÍ¬¼¶£¬×îºójar°üÄÚ)
+# åœ¨æ‰“åŒ…ä¸ºjaråï¼Œå¯ä»¥ç›´æ¥å°†é…ç½®æ–‡ä»¶æ”¾ç½®åˆ°jaråŒ…çš„åŒçº§ç›®å½•æˆ–configæ–‡ä»¶å¤¹ä¸‹ï¼ˆä¼˜å…ˆè¯»å–configæ–‡ä»¶å¤¹ä¸‹ï¼Œç„¶ååŒçº§ï¼Œæœ€åjaråŒ…å†…)
 server:
-  port: 8089 # ÔËĞĞµÄ¶Ë¿Ú
+  port: 8089 # è¿è¡Œçš„ç«¯å£
   servlet:
-    # Ç°¶Ë¿ØÖÆÆ÷µÄ¼àÌıÂ·¾¶,yamlÅäÖÃ´ËÂ·¾¶»á±¨´í
+    # å‰ç«¯æ§åˆ¶å™¨çš„ç›‘å¬è·¯å¾„,yamlé…ç½®æ­¤è·¯å¾„ä¼šæŠ¥é”™
     # path: *.action
-    # ·ÃÎÊµÄÇ°×º
+    # è®¿é—®çš„å‰ç¼€
     context-path: /pms
 
-# Êä³öµÄÈÕÖ¾¼¶±ğ
+# è¾“å‡ºçš„æ—¥å¿—çº§åˆ«
 logging:
   level:
     org:
       springframework: info
 
-# druid spring boot ÅäÖÃ
-druidDataSource: &druidDataSource # ±ğÃû
+# druid spring boot é…ç½®
+druidDataSource: &druidDataSource # åˆ«å
   filters: stat
   maxActive: 50
   initialSize: 1
@@ -39,23 +39,23 @@ spring:
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://192.168.6.7:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8
-      <<: *druidDataSource # *ÒıÓÃ±ğÃû£¬ << ±íÊ¾ºÏ²¢µ½µ±Ç°
-# mybatis ÅäÖÃ
+      <<: *druidDataSource # *å¼•ç”¨åˆ«åï¼Œ << è¡¨ç¤ºåˆå¹¶åˆ°å½“å‰
+# mybatis é…ç½®
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: net.froeasy.wpc.po
   config-location: classpath:mybatis-config/mybatis-config.xml
-# pageHelper·ÖÒ³ÅäÖÃ
+# pageHelperåˆ†é¡µé…ç½®
 pagehelper:
-  # ÉèÖÃÎªtrueÊ±£¬»á½«RowBoundsµÚÒ»¸ö²ÎÊıoffsetµ±³ÉpageNumÒ³ÂëÊ¹ÓÃ
+  # è®¾ç½®ä¸ºtrueæ—¶ï¼Œä¼šå°†RowBoundsç¬¬ä¸€ä¸ªå‚æ•°offsetå½“æˆpageNumé¡µç ä½¿ç”¨
   offset-as-page-num: true
-  # ÉèÖÃÎªtrueÊ±£¬Ê¹ÓÃRowBounds·ÖÒ³»á½øĞĞcount²éÑ¯
+  # è®¾ç½®ä¸ºtrueæ—¶ï¼Œä½¿ç”¨RowBoundsåˆ†é¡µä¼šè¿›è¡ŒcountæŸ¥è¯¢
   row-bounds-with-count: true
-  # ÉèÖÃÎªtrueÊ±£¬Èç¹ûpageSize=0»òÕßRowBounds.limit = 0¾Í»á²éÑ¯³öÈ«²¿µÄ½á¹û
+  # è®¾ç½®ä¸ºtrueæ—¶ï¼Œå¦‚æœpageSize=0æˆ–è€…RowBounds.limit = 0å°±ä¼šæŸ¥è¯¢å‡ºå…¨éƒ¨çš„ç»“æœ
   page-size-zero: true
-  # ·ÖÒ³²ÎÊıºÏÀí»¯£¬Ä¬ÈÏfalse½ûÓÃ£¬½ûÓÃºÏÀí»¯Ê±£¬Èç¹ûpageNum<1»òpageNum>pages»á·µ»Ø¿ÕÊı¾İ
+  # åˆ†é¡µå‚æ•°åˆç†åŒ–ï¼Œé»˜è®¤falseç¦ç”¨ï¼Œç¦ç”¨åˆç†åŒ–æ—¶ï¼Œå¦‚æœpageNum<1æˆ–pageNum>pagesä¼šè¿”å›ç©ºæ•°æ®
   reasonable: true
-  # ÎªÁËÖ§³ÖstartPage(Object params)·½·¨£¬Ôö¼ÓÁËÒ»¸ö`params`²ÎÊıÀ´ÅäÖÃ²ÎÊıÓ³Éä£¬ÓÃÓÚ´ÓMap»òServletRequestÖĞÈ¡Öµ
+  # ä¸ºäº†æ”¯æŒstartPage(Object params)æ–¹æ³•ï¼Œå¢åŠ äº†ä¸€ä¸ª`params`å‚æ•°æ¥é…ç½®å‚æ•°æ˜ å°„ï¼Œç”¨äºä»Mapæˆ–ServletRequestä¸­å–å€¼
   params: pageNum=start;pageSize=limit;
-  # Ö§³ÖÍ¨¹ıMapper½Ó¿Ú²ÎÊıÀ´´«µİ·ÖÒ³²ÎÊı
+  # æ”¯æŒé€šè¿‡Mapperæ¥å£å‚æ•°æ¥ä¼ é€’åˆ†é¡µå‚æ•°
   support-methods-arguments: true
