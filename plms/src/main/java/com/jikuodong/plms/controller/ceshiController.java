@@ -19,7 +19,6 @@ public class ceshiController extends BaseController {
     public void getName() {
         logBefore(logger,"测试");
         PageData pd = this.getPageData();
-        pd.getString("");
         System.out.println(pd);
     }
 }
