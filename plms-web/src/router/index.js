@@ -5,6 +5,8 @@ import HelloWorld from '@/components/HelloWorld'
 Vue.use(Router)
 
 export default new Router({
+  // 跳转url没有#号
+  mode: 'history',
   routes: [
     {
       path: '/',
