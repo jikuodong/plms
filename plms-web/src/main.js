@@ -4,6 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+// 引入iview
+import iView from 'iview'
+import 'iview/dist/styles/iview.css' // 使用 CSS
+Vue.use(iView)
+// 组织生产环境提示
 Vue.config.productionTip = false
 
 /*   *************************************** axios start ********************************* */
