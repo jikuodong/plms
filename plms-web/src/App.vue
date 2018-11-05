@@ -14,6 +14,7 @@ export default {
   @import "../static/css/reset.css"
   #app
     font-family 'Avenir', Helvetica, Arial, sans-serif
+    /* 让页面字体更清晰 */
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
     text-align center

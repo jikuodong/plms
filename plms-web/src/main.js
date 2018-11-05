@@ -7,6 +7,10 @@ import axios from 'axios'
 // 引入iview
 import iView from 'iview'
 import 'iview/dist/styles/iview.css' // 使用 CSS
+import '../static/ueditor/ueditor.config.js'
+import '../static/ueditor/ueditor.all.min.js'
+import '../static/ueditor/lang/zh-cn/zh-cn.js'
+import '../static/ueditor/ueditor.parse.min.js'
 Vue.use(iView)
 // 组织生产环境提示
 Vue.config.productionTip = false
@@ -16,7 +20,6 @@ const baseUrl = process.env.API_BASE_URL
 // 添加请求拦截器
 axios.interceptors.request.use(
   config => {
-    debugger
     // 在发送请求之前做些什么
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
