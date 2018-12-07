@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!-- 数据库驱动包位置 -->
-	 <classPathEntry location="D:\mysql-connector-java-6.0.6.jar" /> 
+	 <classPathEntry location="D:\mysql-connector-java-6.0.6.jar" />
 	<!--<classPathEntry location="C:\oracle\product\10.2.0\db_1\jdbc\lib\ojdbc14.jar" />-->
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<commentGenerator>
@@ -14,35 +14,35 @@
 			connectionURL="jdbc:sqlserver://localhost:1433;Database=mybatis" userId="xmc"
 			password="xmcz3499633">-->
 		<!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
-			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg" 
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg"
 			userId="yycg"
 			password="yycg">
 		</jdbcConnection> -->
 		<!-- 出现提示Cannot obtain primary key information from the database, generated objects may be incomplete,只需在jdbc url后增加 nullCatalogMeansCurrent=true即可(但此时不会生成withBLOBs类)  -->
-		<jdbcConnection 
+		<jdbcConnection
 			driverClass="com.mysql.cj.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/wpc?serverTimezone=UTC&amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true" 
+			connectionURL="jdbc:mysql://localhost:3306/wpc?serverTimezone=UTC&amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
 			userId="root"
 			password="123456">
 		</jdbcConnection>
-		
-		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和 
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
 			NUMERIC 类型解析为java.math.BigDecimal -->
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
-		
+
 		<!-- 生成PO类模型的包名和位置 -->
-		<javaModelGenerator targetPackage="net.froeasy.wpc.po" targetProject="E:\java\generator\src">
+		<javaModelGenerator targetPackage="com.jikuodong.plms.po" targetProject="E:\java\generator\src">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<!-- 生成的映射文件Mapper包名和位置 -->
-		<sqlMapGenerator targetPackage="net.froeasy.wpc.mapper" targetProject="E:\java\generator\src">
+		<sqlMapGenerator targetPackage="com.jikuodong.plms.mapper" targetProject="E:\java\generator\src">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO(mapper接口)的包名和位置 -->
-		<javaClientGenerator type="XMLMAPPER" targetPackage="net.froeasy.wpc.mapper" targetProject="E:\java\generator\src">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.jikuodong.plms.mapper" targetProject="E:\java\generator\src">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
@@ -55,7 +55,7 @@
 		        4，包含BLOB的类；
 		        5，一个用户生成动态查询的条件类（selectByExample, deleteByExample），可选；
 		        6，Mapper接口（可选）
-		    
+
 		        tableName（必要）：要生成对象的表名；
 		        注意：大小写敏感问题。正常情况下，MBG会自动的去识别数据库标识符的大小写敏感度，在一般情况下，MBG会
 		            根据设置的schema，catalog或tablename去查询数据表，按照下面的流程：
@@ -65,7 +65,7 @@
 		            4，否则，使用指定的大小写格式查询；
 		        另外的，如果在创建表的时候，使用的""把数据库对象规定大小写，就算数据库标识符是使用的大写，在这种情况下也会使用给定的大小写来创建表名；
 		        这个时候，请设置delimitIdentifiers="true"即可保留大小写格式；
-		        
+
 		        可选：
 		        1，schema：数据库的schema；
 		        2，catalog：数据库的catalog；
@@ -82,7 +82,7 @@
 		        13，modelType：参考context元素的defaultModelType，相当于覆盖；
 		        14，delimitIdentifiers：参考tableName的解释，注意，默认的delimitIdentifiers是双引号，如果类似MYSQL这样的数据库，使用的是`（反引号，那么还需要设置context的beginningDelimiter和endingDelimiter属性）
 		        15，delimitAllColumns：设置是否所有生成的SQL中的列名都使用标识符引起来。默认为false，delimitIdentifiers参考context的属性
-		        
+
 		        注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
 		        https://www.jianshu.com/p/e09d2370b796
 		-->
@@ -109,15 +109,15 @@
 			<columnOverride column="JYJG" javaType="java.lang.Float" />
 			<columnOverride column="CGL" javaType="java.lang.Float" />
 			<columnOverride column="CGJE" javaType="java.lang.Float" />
-		</table>-->	
-		
-		
+		</table>-->
+
+
 		<!-- <table tableName="yycgdrk" >
 			<columnOverride column="rkl" javaType="java.lang.Float" />
 			<columnOverride column="rkje" javaType="java.lang.Float" />
 			<columnOverride column="ypyxq" javaType="java.lang.Float" />
 		</table> -->
-		
+
  		<!-- <table tableName="cells" ></table>
 		<table tableName="customer" ></table>
 		<table tableName="hosptial_info" ></table>
@@ -153,8 +153,9 @@
 		<table tableName="t_patient" domainObjectName="Patient"></table>
 		<table tableName="t_sys_user" domainObjectName="User"></table> -->
 
-		<table tableName="t_sales_info" domainObjectName="Sale"></table>
-		<table tableName="t_company" domainObjectName="Company"></table>
+		<table tableName="t_pep_difficult_sharing" domainObjectName="DifficultSharing"></table>
+		<table tableName="t_pep_meeting" domainObjectName="Meeting"></table>
+		<table tableName="t_pep_news" domainObjectName="News"></table>
 
 
 		<!--<table tableName="t_resource" domainObjectName="Resource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
@@ -165,13 +166,13 @@
 		<!--<table tableName="trole_tresource" domainObjectName="RoleResource" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 		<table tableName="tuser" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 		<table tableName="tuser_trole" domainObjectName="UserRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
-	
+
 		<!-- <table schema="" tableName="sys_user"></table>
 		<table schema="" tableName="sys_role"></table>
 		<table schema="" tableName="sys_permission"></table>
 		<table schema="" tableName="sys_user_role"></table>
 		<table schema="" tableName="sys_role_permission"></table> -->
-		
+
 		<!-- 有些表的字段需要指定java类型
 		 <table schema="" tableName="">
 			<columnOverride column="" javaType="" />
