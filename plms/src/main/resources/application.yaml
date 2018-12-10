@@ -5,7 +5,7 @@ server:
     # 前端控制器的监听路径,yaml配置此路径会报错
     # path: *.action
     # 访问的前缀
-    context-path: /pms
+    context-path: /plms
 
 # 输出的日志级别
 logging:
@@ -38,12 +38,31 @@ spring:
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.6.7:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://192.168.6.7:3306/plms?Unicode=true&useSSL=false&characterEncoding=UTF-8
       <<: *druidDataSource # *引用别名， << 表示合并到当前
+
+  #redis配置
+  redis:
+    database: 0
+    # Master的ip地址
+    host: 188.131.147.87
+    # 端口号
+    port: 6379
+    # 客户端超时时间
+    timeout: 10s
+    jedis:
+      pool:
+        # 连接池的最大数据库连接数
+        max-active: 600
+        # 最大空闲数
+        max-idle: 300
+        # 最大建立连接等待时间
+        max-wait: 1s
+
 # mybatis 配置
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: net.froeasy.wpc.po
+  type-aliases-package: com.jikuodong.plms.po
   config-location: classpath:mybatis-config/mybatis-config.xml
 # pageHelper分页配置
 pagehelper:
