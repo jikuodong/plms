@@ -1,5 +1,6 @@
 package com.jikuodong.plms.utils.redis;
 
+import com.jikuodong.plms.po.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/redisTest")
 public class RedisTestController {
 
-    private final RedisUtil redisUtil;
+    private static RedisUtil redisUtil = null;
 
     @Autowired
     public RedisTestController(RedisUtil redisUtil) {
-        this.redisUtil = redisUtil;
+        RedisTestController.redisUtil = redisUtil;
     }
 
     /**
@@ -33,9 +34,13 @@ public class RedisTestController {
      */
     @RequestMapping("/testRedisAdd")
     @ResponseBody
-    Object testRedisAdd(String key,String value){
-        redisUtil.set(key,value);
-        System.out.println(redisUtil.get(key));
-        return redisUtil.get(key);
+    Object testRedisAdd(String key,String value,String a, String c){
+        User user = new User();
+        user.setPassword(value);
+        user.setUserid(a);
+        user.setUsername(c);
+        /*redisUtil.set(key,value);*/
+        redisUtil.lSet(key,user);
+        return redisUtil.lGet("2",0,-1);
     }
 }
