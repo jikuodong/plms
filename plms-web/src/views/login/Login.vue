@@ -39,12 +39,23 @@ export default {
     // login登录
     async login () {
       if (this.validateInfo()) {
-        // 进入系统首页
-        this.$router.push({name: 'Index'})
-      } else {
-        // 给出错误提示
-        this.errorText = '用户名密码不正确'
-        this.isShowError = true
+        // 加密密码
+        let psd = await this.$store.dispatch('encryptPassword', this.password)
+        let KeyData = 'jkd0202' + this.userName + ',jkd' + psd
+        let payload = {
+          vue: this,
+          KeyData: KeyData
+        }
+        this.$store.dispatch('login', payload).then(data => {
+          if (data.result === '1') {
+            // 进入系统首页
+            this.$router.push({name: 'Index'})
+          } else {
+            // 给出错误提示
+            this.errorText = data.data
+            this.isShowError = true
+          }
+        })
       }
     },
     // 校验用户名、密码
