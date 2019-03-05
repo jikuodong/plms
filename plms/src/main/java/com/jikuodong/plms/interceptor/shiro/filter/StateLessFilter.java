@@ -1,7 +1,12 @@
 package com.jikuodong.plms.interceptor.shiro.filter;
 
+import com.jikuodong.plms.interceptor.shiro.token.UsernamePasswordTokenCustom;
+import com.jikuodong.plms.interceptor.shiro.token.manager.TokenManagerCustom;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
@@ -29,16 +34,16 @@ public class StateLessFilter extends AccessControlFilter {
      * * 表示是否允许访问 ，如果允许访问返回true，否则false；
      * @param servletRequest
      * @param servletResponse
-     * @param object 表示写在拦截器中括号里面的字符串 mappedValue 就是 [urls] 配置中拦截器参数部分
+     * @param mappedValue 表示写在拦截器中括号里面的字符串 mappedValue 就是 [urls] 配置中拦截器参数部分
      * @return
      * @throws Exception
      * */
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object mappedValue) throws Exception {
-        // Subject subject = getSubject(servletRequest,servletResponse);
-        // String url = getPathWithinApplication(servletRequest);
-        // logger.info("当前用户正在访问的 url => " + url);
-        // logger.info("subject.isPermitted(url);"+subject.isPermitted(url));
+        Subject subject = getSubject(servletRequest,servletResponse);
+        String url = getPathWithinApplication(servletRequest);
+        logger.info("当前用户正在访问的 url => " + url);
+        logger.info("subject.isPermitted(url);"+subject.isPermitted(url));
         return false;
     }
     /**
@@ -47,17 +52,16 @@ public class StateLessFilter extends AccessControlFilter {
      * 如果onAccessDenied也返回false，则直接返回，不会进入请求的方法（只有isAccessAllowed和onAccessDenied的情况下）
      * @method onAccessDenied
      * @author JKD
-     * @param [servletRequest, servletResponse]
+     * @param servletRequest HttpServletRequest 继承自ServletRequest
+     * @param servletResponse HttpServletResponse 继承自ServletResponse
      * @return boolean
      * @data 2018/12/12 17:07
      */
     @Override
     protected boolean onAccessDenied(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
-        // HttpServletRequest 继承自ServletRequest
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        // HttpServletResponse 继承自ServletResponse
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        // token验证
+        // 每一个请求都进行token校验
         return tokenValidator(request, response);
     }
 
@@ -65,12 +69,38 @@ public class StateLessFilter extends AccessControlFilter {
      * 验证是否存在token
      * @method tokenValidator
      * @author JKD
-     * @param [request, response]
+     * @param request 请求
+     * @param response 响应
      * @return java.lang.Boolean
      * @data 2018/12/12 17:58
      */
     private Boolean tokenValidator(HttpServletRequest request, HttpServletResponse response){
-        logger.info("拦截到url:" +request.getRequestURL().toString());
+        logger.info("拦截到的url:" + request.getRequestURL().toString());
+        // 获取请求头中的token
+        String token = request.getHeader("Authorization");
+        // 如果token为空，则拒绝访问，重新登陆
+        if (token == null || token.equals("")){
+            response.setStatus(401);
+            return false;
+        }
+        // 如果存在token，则判断是否有效
+        try {
+            if (TokenManagerCustom.getInstance().check(token)) {
+                // 如果有效，则进行认证
+                Subject subject = SecurityUtils.getSubject();
+                // 根据token创建自定义的登陆token，并设置登陆方式
+                AuthenticationToken tokenCustom = new UsernamePasswordTokenCustom(token);
+                subject.login(tokenCustom);
+                // 通过isPermitted 才能调用doGetAuthorizationInfo方法获取权限信息 subject.isPermitted(request.getRequestURI())
+            } else {  // 无效
+                response.setStatus(401);
+                return false;
+            }
+        } catch (Exception e) { // 发生异常
+            logger.error(e.getMessage(),e);
+            response.setStatus(401);
+            return false;
+        }
         return true;
     }
 }

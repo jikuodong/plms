@@ -15,6 +15,10 @@ export function setToken (token) {
   return sessionStorage.setItem(TokenKey, token)
 }
 
+export function removeToken () {
+  return sessionStorage.removeItem(TokenKey)
+}
+
 export function getUserId (userId) {
   return sessionStorage.setItem(UserKey, userId)
 }

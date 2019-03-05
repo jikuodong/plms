@@ -30,6 +30,17 @@ export default {
     }
   },
 
+  ceshi ({commit}, payload) {
+    let Vue = payload.vue
+    delete payload.vue
+    Vue.$http.get(Vue.getData('TEST_URL')).then(res => {
+      if (res.result === '1') {
+        return {
+          result: '1'
+        }
+      }
+    })
+  },
   // 退出登录
   logout ({commit}, payload) {
     let Vue = payload.vue

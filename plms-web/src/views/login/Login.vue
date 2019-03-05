@@ -41,7 +41,7 @@ export default {
       if (this.validateInfo()) {
         // 加密密码
         let psd = await this.$store.dispatch('encryptPassword', this.password)
-        let KeyData = 'jkd0202' + this.userName + ',jkd' + psd
+        let KeyData = 'jkd0202' + this.userName + ',jkd,' + psd
         let payload = {
           vue: this,
           KeyData: KeyData

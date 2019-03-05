@@ -21,13 +21,4 @@ public class UserServiceImplTest extends BaseServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test
-    public void addUserInfo() throws Exception {
-        User user = new User();
-        user.setPhone("11111111111");
-        user.setUserid("1111111111");
-        user.setPassword("111111111");
-        int count = userService.addUserInfo(user);
-        assertThat("failure addUserInfo",count, is(1));
-    }
 }

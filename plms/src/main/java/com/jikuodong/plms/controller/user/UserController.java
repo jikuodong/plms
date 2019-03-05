@@ -40,11 +40,11 @@ public class UserController extends BaseController {
         logBefore(logger, "添加用户信息");
         User user = new User();
         String userId = UuidUtil.get32UUID();
-        user.setUserid(userId);
+     /*   user.setUserid(userId);
         user.setUsername("admin");
         user.setPassword("123456");
         user.setLastLoginOn(new Date());
-        userService.addUserInfo(user);
+        userService.addUserInfo(user);*/
         return ReturnJsonUtil.returnSucc("success");
     }
 }

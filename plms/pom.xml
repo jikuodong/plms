@@ -23,6 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <!-- lombok版本 -->
+        <lombox.version>1.18.4</lombox.version>
     </properties>
 
     <!--依赖配置-->
@@ -122,6 +124,20 @@
             <artifactId>spring-boot-test</artifactId>
         </dependency>
 
+        <!-- jjwt 依赖，生成token -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <!-- lombok，自动配置get/set -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombox.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <!--构建配置-->
     <build>

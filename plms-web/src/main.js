@@ -4,14 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import store from './store/global-store'
+import {getToken, removeToken, removeUserId} from './utils/authc'
 // 引入iview
 import iView from 'iview'
 import 'iview/dist/styles/iview.css' // 使用 CSS
-import '../static/ueditor/ueditor.config.js'
-import '../static/ueditor/ueditor.all.min.js'
-import '../static/ueditor/lang/zh-cn/zh-cn.js'
-import '../static/ueditor/ueditor.parse.min.js'
+// 系统常量
+import PlmsConst from './utils/PlmsConst.js'
 Vue.use(iView)
+Vue.use(PlmsConst)
 // 组织生产环境提示
 Vue.config.productionTip = false
 
@@ -21,6 +22,9 @@ const baseUrl = process.env.API_BASE_URL
 axios.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
+    // 如果存在token，则添加到请求头中
+    debugger
+    config.headers.Authorization = getToken()
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // `timeout` 指定请求超时的毫秒数(0 表示无超时时间)
     // 如果请求话费了超过 `timeout` 的时间，请求将被中断
@@ -44,9 +48,14 @@ axios.interceptors.response.use(
     // 对响应错误做点什么
     console.log(error.response)
     if (error.response) {
+      debugger
       switch (error.response.status) {
         // 如果状态为401未授权，则清楚登陆token，返回登陆页
         case 401:
+          removeToken()
+          removeUserId()
+          debugger
+          Vue.$router.push({name: 'Login'})
           window.location.reload()
           break
         // 如果状态为302（手动退出），则清楚登陆token，返回登陆页
@@ -70,6 +79,7 @@ Vue.prototype.$http = axios
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

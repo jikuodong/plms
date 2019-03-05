@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jikuodong.plms.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.jikuodong.plms.po.User" >
-    <result column="userId" property="userid" jdbcType="VARCHAR" />
-    <result column="userName" property="username" jdbcType="VARCHAR" />
-    <result column="passWord" property="password" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="is_single_on" property="isSingleOn" jdbcType="BIT" />
-    <result column="failure_times" property="failureTimes" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
-    <result column="last_login_on" property="lastLoginOn" jdbcType="TIMESTAMP" />
+  <resultMap id="userCustom" type="com.jikuodong.plms.po.UserCustom" >
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="OPEN_ID" property="openId" jdbcType="VARCHAR" />
+    <result column="IS_SINGLE_ON" property="isSingleOn" jdbcType="BIT" />
+    <result column="LAST_LOGIN_DT" property="lastLoginDt" jdbcType="TIMESTAMP" />
+    <result column="FAILURE_TIMES" property="failureTimes" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="HEAD_PIC_URL" property="headPicUrl" jdbcType="VARCHAR" />
+    <result column="REFERENCE_ID" property="referenceId" jdbcType="VARCHAR" />
+    <result column="CREATE_DT" property="createDt" jdbcType="TIMESTAMP" />
+    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+    <result column="UPDATE_DT" property="updateDt" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="STATUS_NAME" property="statusName" jdbcType="VARCHAR" />
+    <result column="REFERENCE" property="reference" jdbcType="VARCHAR" />
+    <result column="ROLE_IDS" property="roles" jdbcType="VARCHAR" />
+    <result column="ROLE_NAMES" property="roleNames" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,7 +83,7 @@
   <sql id="Base_Column_List" >
     userId, userName, passWord, phone, is_single_on, failure_times, status, last_login_on
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jikuodong.plms.po.UserExample" >
+  <select id="selectByExample" resultMap="userCustom" parameterType="com.jikuodong.plms.po.UserExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,11 +104,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jikuodong.plms.po.User" >
-    insert into t_sys_user (userId, userName, passWord, 
-      phone, is_single_on, failure_times, 
+    insert into t_sys_user (userId, userName, passWord,
+      phone, is_single_on, failure_times,
       status, last_login_on)
-    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{isSingleOn,jdbcType=BIT}, #{failureTimes,jdbcType=INTEGER}, 
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{isSingleOn,jdbcType=BIT}, #{failureTimes,jdbcType=INTEGER},
       #{status,jdbcType=INTEGER}, #{lastLoginOn,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jikuodong.plms.po.User" >
@@ -207,4 +218,83 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <sql id="userBaseInfo" >
+    SELECT
+      a.*,
+      ts.DIC_DATA_NAME STATUS_NAME,
+      b.SALES_NAME REFERENCE,
+      GROUP_CONCAT(c.ROLE_ID) ROLE_IDS,
+      GROUP_CONCAT(d.ROLE_NAME) ROLE_NAMES
+    FROM
+      t_sys_user a
+        LEFT JOIN t_sales_info b ON b.ID = a.REFERENCE_ID
+        LEFT JOIN t_sys_user_role_relation c ON c.USER_ID = a.USER_ID
+        LEFT JOIN t_sys_role d ON d.ROLE_ID = c.ROLE_ID
+        LEFT JOIN ts_dic_data ts ON ts.DIC_DATA_VALUE = a.`STATUS` and ts.DIC_VALUE = 'UserStatus'
+  </sql>
+  <!-- 根据用户名或手机号码查询用户信息 -->
+  <select id="selectUserByUsernameOrPhoneOrOpenId" parameterType="String" resultMap="userCustom">
+    <include refid="userBaseInfo" />
+    WHERE
+    a.USER_NAME = #{value}
+    OR a.PHONE = #{value}
+    OR a.OPEN_ID = #{value}
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.jikuodong.plms.po.User" >
+    update t_sys_user
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null" >
+        OPEN_ID = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="isSingleOn != null" >
+        IS_SINGLE_ON = #{isSingleOn,jdbcType=BIT},
+      </if>
+      <if test="lastLoginDt != null" >
+        LAST_LOGIN_DT = #{lastLoginDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="failureTimes != null" >
+        FAILURE_TIMES = #{failureTimes,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="headPicUrl != null" >
+        HEAD_PIC_URL = #{headPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceId != null" >
+        REFERENCE_ID = #{referenceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDt != null" >
+        CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null" >
+        CREATE_USER_ID = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDt != null" >
+        UPDATE_DT = #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUserId != null" >
+        UPDATE_USER_ID = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 获取用户基本信息 -->
+  <select id="findUserBaseInfoByUserId" parameterType="pd" resultMap="userCustom">
+    <include refid="userBaseInfo" />
+    WHERE
+    a.USER_ID = #{VALUE}
+  </select>
 </mapper>
