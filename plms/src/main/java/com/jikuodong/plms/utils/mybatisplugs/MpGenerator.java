@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Mybatis Plugs 代码自动生成器
  * @author JKD
  * @version 1.0.0
  * @ClassName MpGenerator.java
@@ -33,17 +34,17 @@ public class MpGenerator {
     private static String authorName = "jikuodong";
 
     // 要生成的表名
-    private static String[] tables = {"user"};
+    private static String[] tables = {"t_sys_user"};
 
     // table的前缀
-    private static String prefix = "";
+    private static String prefix = "t_";
 
     // 数据库类型
     private static DbType dyType = DbType.MYSQL;
 
     // MySql数据库配置
     private static String driverName = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://127.0.0.1:3306/mytest?Unicode=true&useSSL=false&characterEncoding=UTF-8";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/plms?Unicode=true&useSSL=false&characterEncoding=UTF-8";
     private static String username = "root";
     private static String password = "123456";
 
@@ -85,7 +86,7 @@ public class MpGenerator {
                 .setEnableCache(false)      // 是否开启二级缓存
                 .setBaseResultMap(true)     // 是否XML 添加ResultMap
                 .setBaseColumnList(true)    // 同上
-                .setOpen(false)             // 是否生成后打开文件夹
+                .setOpen(true)             // 是否生成后打开文件夹
                 .setAuthor(authorName)
                 // 自定义文件命名，注意 %s 会自动填充表实体属性！
                 .setMapperName("%sMapper")
