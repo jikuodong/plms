@@ -38,7 +38,7 @@ spring:
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.6.7:3306/plms?Unicode=true&useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://192.168.6.7:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8
       <<: *druidDataSource # *引用别名， << 表示合并到当前
 
   #redis配置
@@ -59,11 +59,15 @@ spring:
         # 最大建立连接等待时间
         max-wait: 1s
 
-# mybatis 配置
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.jikuodong.plms.po
+#mybatis-plus配置
+mybatis-plus:
   config-location: classpath:mybatis-config/mybatis-config.xml
+  type-aliases-package: com.jikuodong.plms.po
+  mapper-locations: classpath:mapper/*.xml,mapper/pms/*.xml
+  check-config-location: false # 不检查Mybatis XML 的存在
+  global-config:
+    refresh: false # 自动刷新mapper，生产需要关闭，调试神器
+
 # pageHelper分页配置
 pagehelper:
   # 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用
