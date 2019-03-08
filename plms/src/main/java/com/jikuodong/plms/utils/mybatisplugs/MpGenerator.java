@@ -34,17 +34,17 @@ public class MpGenerator {
     private static String authorName = "jikuodong";
 
     // 要生成的表名
-    private static String[] tables = {"t_sys_user"};
+    private static String[] tables = {"t_eps_laboratory"};
 
     // table的前缀
-    private static String prefix = "t_";
+    private static String prefix = "t_eps_";
 
     // 数据库类型
     private static DbType dyType = DbType.MYSQL;
 
     // MySql数据库配置
     private static String driverName = "com.mysql.jdbc.Driver";
-    private static String url = "jdbc:mysql://127.0.0.1:3306/plms?Unicode=true&useSSL=false&characterEncoding=UTF-8";
+    private static String url = "jdbc:mysql://127.0.0.1:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8";
     private static String username = "root";
     private static String password = "123456";
 

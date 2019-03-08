@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikuodong.plms.mapper.LaboratoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.jikuodong.plms.po.Laboratory">
+        <id column="ID" property="id" />
+        <result column="LAB_NAME" property="labName" />
+        <result column="LAB_PHONE" property="labPhone" />
+        <result column="LAB_ADDRESS" property="labAddress" />
+        <result column="LAB_STATUS" property="labStatus" />
+        <result column="CREATE_DATE" property="createDate" />
+        <result column="UPDATE_DATE" property="updateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID, LAB_NAME, LAB_PHONE, LAB_ADDRESS, LAB_STATUS, CREATE_DATE, UPDATE_DATE
+    </sql>
+
+</mapper>
