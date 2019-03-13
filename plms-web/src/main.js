@@ -23,7 +23,6 @@ axios.interceptors.request.use(
   config => {
     // 在发送请求之前做些什么
     // 如果存在token，则添加到请求头中
-    debugger
     config.headers.Authorization = getToken()
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // `timeout` 指定请求超时的毫秒数(0 表示无超时时间)

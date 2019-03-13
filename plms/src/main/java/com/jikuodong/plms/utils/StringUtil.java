@@ -16,7 +16,7 @@ public class StringUtil {
 
 	/**
 	 * 将以逗号分隔的字符串转换成字符串数组
-	 * 
+	 *
 	 * @param valStr
 	 * @return String[]
 	 */
@@ -33,8 +33,8 @@ public class StringUtil {
 		}
 		return returnStr;
 	}
-	
-	
+
+
 	/**
 	 * String[]处理数据
 	 * @param obj
@@ -61,19 +61,20 @@ public class StringUtil {
 			return obj;
 		}
 		return str;
-	} 
-	
+	}
+
 	/**
 	 * 转String，null时返回""
 	 * @param obj
 	 * @return
 	 */
 	public static String toStringOrEmpty(Object obj){
-		if(null != obj)
+		if(null != obj) {
 			return String.valueOf(obj);
+		}
 		return "";
-	} 
-	
+	}
+
 	/**
 	 * 获取A第n次出现某字符B的下标
 	 * @param string1 被匹配的字符A
@@ -94,7 +95,7 @@ public class StringUtil {
 	    }
 	    return slashMatcher.start();
 	 }
-	
+
 	/**
 	 * 字符串转编码格式
 	 * @param str 字符串
@@ -103,15 +104,15 @@ public class StringUtil {
 	 * @throws UnsupportedEncodingException
 	 */
 	public static String changeCharSet(String str, String newCharset) throws UnsupportedEncodingException {
-        if (str != null) {  
-            // 用默认字符编码解码字符串。  
+        if (str != null) {
+            // 用默认字符编码解码字符串。
             byte[] bs = str.getBytes("UTF-8");
-            // 用新的字符编码生成字符串  
+            // 用新的字符编码生成字符串
             return new String(bs, newCharset);
-        }  
-        return str;  
+        }
+        return str;
     }
-	
+
 	/**
 	 * String[]去除重复
 	 */

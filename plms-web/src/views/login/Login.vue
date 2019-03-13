@@ -9,9 +9,6 @@
         <Input v-model="password" placeholder="登录密码" style="width: 80%;margin-top: 20px" type="password" size="large" @on-focus="cancelError">
           <Icon type="md-lock" slot="prefix" size="20"/>
         </Input><br>
-        <!--<Input placeholder="右侧验证码" style="width: 50%;margin-top: 20px" type="password">-->
-          <!--<Icon type="md-lock" slot="prefix" size="20"/>-->
-        <!--</Input><br>-->
         <div class="error-text" v-if="isShowError">
           <Icon type="md-close-circle" size="20" style="color: #dc3c00" />
           <span>{{errorText}}</span><br>

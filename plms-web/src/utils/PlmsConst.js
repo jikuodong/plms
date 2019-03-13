@@ -14,6 +14,7 @@ export default{
 /* ************************************ 操作的URL地址 start ****************************** */
 // 登录URL
 const LOGIN_URL = 'login'
-const TEST_URL = 'user/addUserInfo'
+// const TEST_URL = 'user/addUserInfo'
+const TEST_URL = 'laboratory/addLab'
 
 /* ************************************ 操作的URL地址 end ****************************** */

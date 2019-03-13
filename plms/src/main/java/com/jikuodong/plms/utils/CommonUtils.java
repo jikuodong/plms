@@ -7,11 +7,18 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static java.util.regex.Pattern.*;
+
+/**
+ *
+ * @author JKD
+ * @data 2019/3/13 11:26
+ */
 public class CommonUtils
 {
 	/**
 	 * 字符串转MAD5
-	 * 
+	 *
 	 * @param str
 	 *            字符串
 	 * @return
@@ -44,9 +51,11 @@ public class CommonUtils
 
 		for (int i = 0; i < byteArray.length; i++)
 		{
-			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)
+			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
 				md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));
-			else md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+			} else {
+				md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
 		}
 
 		return md5StrBuff.toString();
@@ -54,7 +63,7 @@ public class CommonUtils
 
 	/**
 	 * 字符串转MAD5
-	 * 
+	 *
 	 * @param str
 	 *            字符串
 	 * @param charset
@@ -89,9 +98,11 @@ public class CommonUtils
 
 		for (int i = 0; i < byteArray.length; i++)
 		{
-			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)
+			if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
 				md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));
-			else md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+			} else {
+				md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+			}
 		}
 		return md5StrBuff.toString();
 	}
@@ -228,7 +239,7 @@ public class CommonUtils
 
 	public static String isNumericToValue(String str, int defaultValue)
 	{
-		Pattern pattern = Pattern.compile("^[\\d]*$");
+		Pattern pattern = compile("^[\\d]*$");
 		if (pattern.matcher(str).matches())
 		{
 			return str;
@@ -239,7 +250,7 @@ public class CommonUtils
 
 	public static int isNumericToIntValue(String str, int defaultValue)
 	{
-		Pattern pattern = Pattern.compile("^[\\d]*$");
+		Pattern pattern = compile("^[\\d]*$");
 		if (pattern.matcher(str).matches())
 		{
 			return toInt(str);
@@ -250,7 +261,7 @@ public class CommonUtils
 
 	/**
 	 * 判断字符串是否为null
-	 * 
+	 *
 	 * @param value
 	 * @return
 	 */
@@ -261,8 +272,8 @@ public class CommonUtils
 
 	/**
 	 * 判断字符串是否为空
-	 * 
-	 * @param value
+	 *
+	 * @param str
 	 * @return
 	 */
 	public static boolean isBlank(String str)
@@ -309,7 +320,7 @@ public class CommonUtils
 					bo.write(temByte);
 					byteread = in.read(temByte);
 				}
-				Map<String, Object> map = new HashMap<String, Object>();
+				Map<String, Object> map = new HashMap<>(5);
 				map.put("fileName", f.getName());
 				map.put("fileData", bo.toByteArray());
 				list.add(map);
@@ -354,8 +365,9 @@ public class CommonUtils
 	public static void downloadDirectory(byte[] bytes, String dir) throws Exception
 	{
 		File f = new File(dir);
-		if (!f.exists())
+		if (!f.exists()) {
 			f.mkdir();
+		}
 
 		List<?> list = null;
 		try (ByteArrayInputStream bi = new ByteArrayInputStream(bytes); ObjectInputStream oi = new ObjectInputStream(bi)) {
@@ -502,7 +514,7 @@ public class CommonUtils
 
 	/**
 	 * 生成UUID
-	 * 
+	 *
 	 * @return
 	 */
 	public static String getNonceStr()
@@ -527,7 +539,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转字符串
-	 * 
+	 *
 	 * @param val
 	 * @return 字符串
 	 */
@@ -538,7 +550,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转int
-	 * 
+	 *
 	 * @param val
 	 * @return int
 	 */
@@ -556,7 +568,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转Float
-	 * 
+	 *
 	 * @param val
 	 * @return Float
 	 */
@@ -574,7 +586,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转Long
-	 * 
+	 *
 	 * @param val
 	 *            对象
 	 * @return Long
@@ -593,7 +605,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转Double
-	 * 
+	 *
 	 * @param val
 	 *            对象
 	 * @return Double
@@ -612,7 +624,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转BigDecimal
-	 * 
+	 *
 	 * @param val
 	 *            对象
 	 * @return BigDecimal
@@ -631,7 +643,7 @@ public class CommonUtils
 
 	/**
 	 * Object对象转Boolean
-	 * 
+	 *
 	 * @param val
 	 *            对象
 	 * @return Boolean
@@ -654,7 +666,7 @@ public class CommonUtils
 
 	/**
 	 * 拼接字符串
-	 * 
+	 *
 	 * @param objs
 	 * @return
 	 */

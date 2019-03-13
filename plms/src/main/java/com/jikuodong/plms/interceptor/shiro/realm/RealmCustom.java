@@ -73,7 +73,14 @@ public class RealmCustom extends AuthorizingRealm {
         return new SimpleAuthorizationInfo();
     }
 
-    // 用户名密码登录流程
+    /**
+     * 用户名密码登录流程
+     * @method usernamePasswordLogin
+     * @author JKD
+     * @param token 前端传入的token数据
+     * @return org.apache.shiro.authc.SimpleAuthenticationInfo
+     * @data 2019/3/13 11:19
+     */
     private SimpleAuthenticationInfo usernamePasswordLogin(UsernamePasswordTokenCustom token) throws AuthenticationException{
         String userId = token.getUsername();
         // 查询数据库，获取信息
@@ -93,10 +100,18 @@ public class RealmCustom extends AuthorizingRealm {
         if ( user.getStatus() == 0) {
             throw new AccountException("用户待审核");
         }
+        //认证信息里存放账号密码, getName() 是当前Realm的继承方法,通常返回当前类名 :RealmCustom
         return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
     }
 
-    // 无状态token登录
+    /**
+     *  无状态token登录
+     * @method statelessTokenLogin
+     * @author JKD
+     * @param token 前端传入的token数据
+     * @return org.apache.shiro.authc.SimpleAuthenticationInfo
+     * @data 2019/3/13 11:16
+     */
     private SimpleAuthenticationInfo statelessTokenLogin(UsernamePasswordTokenCustom token) throws AuthenticationException{
         // token登录之前已经校验过是有效、合法的，所以直接设置凭据信息
         token.setPassword(token.getStatelessToken().toCharArray());
@@ -105,6 +120,7 @@ public class RealmCustom extends AuthorizingRealm {
         String userName = tokenManager.getUserNameByToken(token.getStatelessToken());
         // 获取redis中的用户实体类
         User user = tokenManager.getUserEntity(userName);
+        //认证信息里存放账号密码, getName() 是当前Realm的继承方法,通常返回当前类名 :RealmCustom
         return new SimpleAuthenticationInfo(user, token.getStatelessToken(), getName());
     }
 }
