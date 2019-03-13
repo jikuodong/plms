@@ -69,7 +69,7 @@ public abstract class AbstractTokenManager implements TokenManager{
      */
     @Override
     public AuthenticationToken getToken(String token) {
-        if (token == null || token.equals("")) {
+        if (token == null || "".equals(token)) {
             return null;
         }
         return new UsernamePasswordTokenCustom(token);

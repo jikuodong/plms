@@ -23,14 +23,14 @@ import org.springframework.stereotype.Service;
 public class LaboratoryServiceImpl implements LaboratoryService {
 
     @Override
-    public boolean addLab(String id, String LabName, String LabPhone) {
+    public boolean addLab(String id, String labName, String labPhone) {
         QueryWrapper<Laboratory> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("LAB_NAME", "测试");
         Laboratory laboratory = new Laboratory();
         laboratory = laboratory.selectOne(queryWrapper);
         laboratory.setId(id);
-        laboratory.setLabName(LabName);
-        laboratory.setLabPhone(LabPhone);
+        laboratory.setLabName(labName);
+        laboratory.setLabPhone(labPhone);
         laboratory.insert();
         return true;
     }

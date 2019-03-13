@@ -79,7 +79,7 @@ public class StateLessFilter extends AccessControlFilter {
         // 获取请求头中的token
         String token = request.getHeader("Authorization");
         // 如果token为空，则拒绝访问，重新登陆
-        if (token == null || token.equals("")){
+        if (token == null || "".equals(token)){
             response.setStatus(401);
             return false;
         }

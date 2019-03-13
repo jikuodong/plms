@@ -22,8 +22,8 @@ public class StringUtil {
 	 */
 	public static String[] strList(String valStr) {
 		int i = 0;
-		String TempStr = valStr;
-		String[] returnStr = new String[valStr.length() + 1 - TempStr.replace(",", "").length()];
+		String tempStr = valStr;
+		String[] returnStr = new String[valStr.length() + 1 - tempStr.replace(",", "").length()];
 		valStr = valStr + ",";
 		while (valStr.indexOf(',') > 0) {
 			returnStr[i] = valStr.substring(0, valStr.indexOf(','));

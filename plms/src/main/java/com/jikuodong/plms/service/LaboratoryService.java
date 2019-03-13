@@ -11,6 +11,6 @@ package com.jikuodong.plms.service;
  */
 public interface LaboratoryService{
 
- boolean addLab (String id, String LabName, String LabPhone);
+ boolean addLab (String id, String labName, String labPhone);
 
 }

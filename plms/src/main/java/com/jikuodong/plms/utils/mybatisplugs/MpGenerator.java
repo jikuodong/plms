@@ -158,7 +158,7 @@ public class MpGenerator {
         generator.setCfg(new InjectionConfig() {
                     @Override
                     public void initMap() {
-                        Map<String, Object> map = new HashMap<>();
+                        Map<String, Object> map = new HashMap<>(5);
                         map.put("abc", this.getConfig().getGlobalConfig().getAuthor() + "-mp");
                         this.setMap(map);
                     }

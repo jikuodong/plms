@@ -15,7 +15,7 @@ import java.util.Map;
 public class ReturnJsonUtil {
     /**
      * 返回成功数据
-     * @param resObj
+     * @param resobj
      * @return
      */
     public static JSONObject returnSucc(Object resobj){
@@ -52,7 +52,7 @@ public class ReturnJsonUtil {
     /**
      * 返回成功数据以及其他相加的数据
      * 排除不想要的数据字段
-     * @param resObj
+     * @param resobj
      * @return
      */
     public static JSONObject returnSuccForOtherAndExclude(Object resobj, Object other
@@ -92,7 +92,7 @@ public class ReturnJsonUtil {
 
     /**
      * 返回错误结果
-     * @param resObj
+     * @param resobj
      * @return
      */
     public static JSONObject returnFail(Object resobj){
