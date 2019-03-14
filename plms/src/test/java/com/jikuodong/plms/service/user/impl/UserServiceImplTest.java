@@ -1,13 +1,9 @@
 package com.jikuodong.plms.service.user.impl;
 
-import com.jikuodong.plms.po.User;
-import com.jikuodong.plms.service.BaseServiceTest;
 import com.jikuodong.plms.service.user.UserService;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
 /**
  * @author Ji kuodong
@@ -16,7 +12,7 @@ import static org.junit.Assert.*;
  * @Description 用户信息service 实现类
  * @createTime 2018年12月07日 13:23:00
  */
-public class UserServiceImplTest extends BaseServiceTest {
+public class UserServiceImplTest {
 
     @Autowired
     private UserService userService;
