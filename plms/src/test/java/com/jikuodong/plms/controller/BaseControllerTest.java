@@ -43,8 +43,7 @@ public class BaseControllerTest {
     @Resource
     private SecurityManager securityManager;
 
-    protected MockMvc mvc;
-    private Subject subject;
+    private MockMvc mvc;
     private MockHttpServletRequest mockHttpServletRequest;
     private MockHttpServletResponse mockHttpServletResponse;
 
@@ -106,7 +105,7 @@ public class BaseControllerTest {
      * @throws
      */
     private void login(String token) {
-        subject = new WebSubject.Builder(mockHttpServletRequest, mockHttpServletResponse).buildWebSubject();
+        Subject subject = new WebSubject.Builder(mockHttpServletRequest, mockHttpServletResponse).buildWebSubject();
         AuthenticationToken auth = new UsernamePasswordTokenCustom(token);
         subject.login(auth);
         ThreadContext.bind(subject);
