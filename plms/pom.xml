@@ -38,7 +38,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis.plus.boot.version}</version>
         </dependency>
-
+        <!--AOP-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!-- mp-generator -->
         <dependency>
             <groupId>com.baomidou</groupId>
