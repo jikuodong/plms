@@ -1,7 +1,7 @@
 # plms
 个人生活管理系统
 # 后台框架
-Spring + Springboot + Mybatis Plugs 
+Spring + Springboot + Mybatis Plugs + shiro + redis + token + AOP
 # 前端框架
 vue + vuex + iview + axios
 # 登录功能
