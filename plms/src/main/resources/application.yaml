@@ -32,14 +32,31 @@ druidDataSource: &druidDataSource # 别名
   logAbandoned: true
   type: com.alibaba.druid.pool.DruidDataSource
 
-spring:
+#spring:
+#  datasource:
+#    druid:
+#      username: root
+#      password: 123456
+#      driver-class-name: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://127.0.0.1:3306/how2java?Unicode=true&characterEncoding=UTF-8
+#      <<: *druidDataSource # *引用别名， << 表示合并到当前
+
+# 多数据源配置
+multiple:
   datasource:
     druid:
-      username: root
-      password: 123456
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.6.7:3306/wpc?Unicode=true&useSSL=false&characterEncoding=UTF-8
-      <<: *druidDataSource # *引用别名， << 表示合并到当前
+      master:
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/froeasy-wuxi?Unicode=true&characterEncoding=UTF-8
+        <<: *druidDataSource # *引用别名， << 表示合并到当前
+      slave:
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/wpc?Unicode=true&characterEncoding=UTF-8
+        <<: *druidDataSource # *引用别名， << 表示合并到当前
 
   #redis配置
   redis:
@@ -63,7 +80,7 @@ spring:
 mybatis-plus:
   config-location: classpath:mybatis-config/mybatis-config.xml
   type-aliases-package: com.jikuodong.plms.po
-  mapper-locations: classpath:mapper/*.xml,mapper/pms/*.xml
+  mapper-locations: classpath:mapper/*.xml
   check-config-location: false # 不检查Mybatis XML 的存在
   global-config:
     refresh: false # 自动刷新mapper，生产需要关闭，调试神器
