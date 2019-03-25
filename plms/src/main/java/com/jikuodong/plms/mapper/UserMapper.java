@@ -5,6 +5,7 @@ import java.util.List;
 import com.jikuodong.plms.po.User;
 import com.jikuodong.plms.po.UserCustom;
 import com.jikuodong.plms.po.UserExample;
+import com.jikuodong.plms.utils.PageData;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
@@ -29,4 +30,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
     // 获取用户基本信息
     UserCustom findUserBaseInfoByUserId(String userId) throws Exception;
+    // 获取用户列表
+    List<User> getUserList (PageData pd) throws Exception;
 }

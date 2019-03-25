@@ -297,4 +297,18 @@
     WHERE
     a.USER_ID = #{VALUE}
   </select>
+
+  <select id="getUserList" resultMap="userCustom">
+    select * from t_sys_user a
+    <where>
+    <if test="startDate != null">
+      <![CDATA[ a.CREATE_DT >= #{startDate,jdbcType=DATE}]]>
+    </if>
+    <if test="endDate != null">
+      AND <![CDATA[ a.CREATE_DT <= #{endDate,jdbcType=DATE}  ]]>
+    </if>
+    </where>
+  </select>
+
+
 </mapper>

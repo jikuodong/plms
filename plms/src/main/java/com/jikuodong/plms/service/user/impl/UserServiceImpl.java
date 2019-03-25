@@ -1,14 +1,18 @@
 package com.jikuodong.plms.service.user.impl;
 
+import com.jikuodong.plms.annotation.TargetDB;
+import com.jikuodong.plms.datasource.DataSourceKey;
 import com.jikuodong.plms.mapper.UserMapper;
 import com.jikuodong.plms.po.User;
 import com.jikuodong.plms.po.UserCustom;
 import com.jikuodong.plms.service.user.UserService;
 import com.jikuodong.plms.system.UserConst;
+import com.jikuodong.plms.utils.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Ji kuodong
@@ -81,5 +85,21 @@ public class UserServiceImpl implements UserService {
         user.setFailureTimes(0);
         int row = userMapper.updateByPrimaryKeySelective(user);
         return row == 1;
+    }
+
+    /**
+     * 获取用户列表
+     * @method getUserList
+     * @author JKD
+     * @return java.util.List<com.jikuodong.plms.po.User>
+     * @data 2019/3/25 8:39
+     */
+    @TargetDB(DataSourceKey.DB_SLAVE)
+    @Override
+    public List<User> getUserList(Date start, Date end) throws Exception {
+        PageData pd = new PageData();
+        pd.put("startDate", start);
+        pd.put("endDate", end);
+        return userMapper.getUserList(pd);
     }
 }

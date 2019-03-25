@@ -3,6 +3,10 @@ package com.jikuodong.plms.service.user;
 import com.jikuodong.plms.po.User;
 import com.jikuodong.plms.po.UserCustom;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+import java.util.List;
+
 /**
  * @author Ji kuodong
  * @version 1.0.0
@@ -37,6 +41,13 @@ public interface UserService {
      * 更新用户登录信息
      */
     boolean updateUserLoginInfo(String userId) throws Exception;
+
+    /**
+     * 获取用户列表
+     * @author JKD
+     * @data 2019/3/22 17:37
+     */
+    List<User> getUserList(Date start, Date end) throws Exception;
 }
 
 

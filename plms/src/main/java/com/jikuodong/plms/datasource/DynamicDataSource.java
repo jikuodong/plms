@@ -3,6 +3,7 @@ package com.jikuodong.plms.datasource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**
+ * 决定使用哪个数据库 继承AbstractRoutingDataSource
  * @author JKD
  * @version 1.0.0
  * @ClassName DynamicDataSource.java

@@ -61,7 +61,7 @@ public class BaseControllerTest {
         // 初始化MockMvc对象
         this.mvc = MockMvcBuilders.webAppContextSetup(context).build();
         SecurityUtils.setSecurityManager(securityManager);
-        login(TEST_TOKEN);
+       // login(TEST_TOKEN);
     }
 
     /**
