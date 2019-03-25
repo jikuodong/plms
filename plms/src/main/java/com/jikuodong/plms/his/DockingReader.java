@@ -13,6 +13,7 @@ import java.util.concurrent.BlockingQueue;
 
 
 /**
+ *  类定时执行的信息读取
  * @author JKD
  * @version 1.0.0
  * @ClassName DockingReader.java

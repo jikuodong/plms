@@ -62,6 +62,7 @@ public class DockingWriter implements Runnable {
     private  void writeInfo() throws InterruptedException {
         // 如果没有会一直阻塞
         User user = queue.take();
+        /* TODO  此处添加数据相关操作 */
         System.out.println("此处添加数据相关操作");
         LOG.info("=============== 数据同步：病理号[{}] -> 同步成功", user.getUserName());
     }
