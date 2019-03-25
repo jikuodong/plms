@@ -26,7 +26,7 @@
     <!--然后定义Logger，只有定义了Logger并引入的appender，appender才会生效-->
     <Loggers>
         <!-- 项目 -->
-        <logger name="net.froeasy" level="DEBUG" additivity="false">
+        <logger name="com.jikuodong" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile" />
         </logger>
