@@ -32,6 +32,14 @@ druidDataSource: &druidDataSource # 别名
   logAbandoned: true
   type: com.alibaba.druid.pool.DruidDataSource
 
+spring:
+  # rabbitmq 配置
+  rabbitmq:
+    host: 192.168.6.7
+    port: 5672
+    username: admin
+    password: 123456
+
 #spring:
 #  datasource:
 #    druid:

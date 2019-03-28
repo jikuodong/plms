@@ -298,7 +298,7 @@
     a.USER_ID = #{VALUE}
   </select>
 
-  <select id="getUserList" resultMap="userCustom">
+  <select id="getUserList" resultMap="userCustom" parameterType="pd">
     select * from t_sys_user a
     <where>
     <if test="startDate != null">

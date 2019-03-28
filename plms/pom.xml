@@ -28,6 +28,8 @@
         <!-- mybatis 版本-->
         <mybatis.plus.boot.version>3.0.5</mybatis.plus.boot.version>
         <mybatis.starter.version>1.3.2</mybatis.starter.version>
+        <!--rabbit依赖版本-->
+        <amqp.version>2.1.3.RELEASE</amqp.version>
     </properties>
 
     <!--依赖配置-->
@@ -190,6 +192,12 @@
             <version>1.3</version>
         </dependency>
         <!--读取配置文件 end-->
+        <!-- rabbitMQ 相关依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <version>${amqp.version}</version>
+        </dependency>
     </dependencies>
     <!--解决Sqljdbc4报错-->
     <repositories>
