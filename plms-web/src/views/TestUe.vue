@@ -1,26 +1,43 @@
 <template>
   <div class="components-container">
-    <Button @click="ceshi">测试</Button>
+    {{context}}
   </div>
 </template>
 
 <script>
+import Stomp from 'stompjs' // 可以npm安装，也可以直接下载stomp.js引入
+import {MQ_SERVICE, MQ_USERNAME, MQ_PASSWORD} from '../utils/rabbit'
 export default {
-  name: 'TestUe',
+  name: 'rabbitMQ',
   data () {
-    return {}
+    return {
+      context: '',
+      client: Stomp.client(MQ_SERVICE) // 使用client 直接创建Stomp 连接
+    }
   },
   methods: {
-    ceshi () {
-      let payload = {
-        vue: this
-      }
-      this.$store.dispatch('ceshi', payload).then(res => {
-        if (res.result === '1') {
-          alert('成功！')
-        }
-      })
+    connect () {
+      // 用户名、密码、连接成功回调、失败回调
+      this.client.connect(MQ_USERNAME, MQ_PASSWORD, this.onConnected, this.onFailed, '/')
+      // 关闭心跳，SockJs不支持
+      this.client.heartbeat.outgoing = 20000
+      this.client.heartbeat.incoming = 0
+    },
+    onConnected (frame) {
+      console.log('Connected: ' + frame)
+      let queue = '/queue/1111111111111'
+      this.client.subscribe(queue, this.responseCallBack)
+    },
+    onFailed (frame) {
+      console.log('Failed: ' + frame)
+    },
+    responseCallBack (frame) {
+      console.log('responseCallback msg=>' + frame.body)
+      this.context += frame.body
     }
+  },
+  created () {
+    this.connect()
   }
 }
 </script>
