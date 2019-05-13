@@ -37,6 +37,7 @@ public class HisTask {
         // 读取任务，定时任务
         DockingReader reader = new DockingReader(queue, userService);
         // 定时执行 reader 任务，第一次延迟10秒执行，后面每隔一段时间执行
+        // 构造参数为：（进程，初始时间，间隔时间，时间单位）
         scheduledExec.scheduleWithFixedDelay(reader, 10, reader.getInterval(), TimeUnit.SECONDS);
         // 写入任务，阻塞队列执行
         // 获取可缓存线程池
