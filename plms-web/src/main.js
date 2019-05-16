@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import store from './store/global-store'
 import {getToken, removeToken, removeUserId} from './utils/authc'
+import './permission'
 // 引入iview
 import iView from 'iview'
 import 'iview/dist/styles/iview.css' // 使用 CSS
@@ -53,7 +54,6 @@ axios.interceptors.response.use(
         case 401:
           removeToken()
           removeUserId()
-          debugger
           Vue.$router.push({name: 'Login'})
           window.location.reload()
           break

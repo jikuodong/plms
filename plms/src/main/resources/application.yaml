@@ -70,7 +70,7 @@ multiple:
   redis:
     database: 0
     # Master的ip地址
-    host: 188.131.147.87
+    host: 127.0.0.1
     # 端口号
     port: 6379
     # 客户端超时时间

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jikuodong.plms.mapper.PermissionMapperCustom">
+    <!-- 获取角色权限路由 -->
+    <select id="findRoleRouterByUserId" parameterType="String" resultType="pd">
+        SELECT
+            f.MENU_ID,
+            f.PARENT_ID,
+            f.MENU_NAME,
+            f.MENU_URL,
+            f.MENU_ICON,
+            f.ROUTER_NAME,
+            f.COMPONENT_PATH,
+            f.REDIRECT,
+            f.SORT_NUM
+        FROM
+            t_sys_menu f
+        ORDER BY f.SORT_NUM
+    </select>
+</mapper>

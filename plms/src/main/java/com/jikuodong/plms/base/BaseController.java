@@ -1,7 +1,10 @@
 package com.jikuodong.plms.base;
 
+import com.jikuodong.plms.po.User;
 import com.jikuodong.plms.utils.CommonUtils;
 import com.jikuodong.plms.utils.PageData;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -170,5 +173,12 @@ public class BaseController {
     public static void logAfter(Logger logger) {
         logger.info("end");
         logger.info("");
+    }
+    /**
+     * 从shiro中获取当前用户名，从redis中获取当前用户的实体类
+     */
+    public User getCurrentUser() {
+        Subject subject = SecurityUtils.getSubject();
+        return (User) subject.getPrincipal();
     }
 }

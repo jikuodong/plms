@@ -1,6 +1,6 @@
 <template>
   <div class="components-container">
-    {{context}}
+    <div>测试MQ</div>
   </div>
 </template>
 
