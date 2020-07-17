@@ -181,4 +181,8 @@ public class BaseController {
         Subject subject = SecurityUtils.getSubject();
         return (User) subject.getPrincipal();
     }
+
+    public void ceshi(){
+        System.out.println("测试一下");
+    }
 }
